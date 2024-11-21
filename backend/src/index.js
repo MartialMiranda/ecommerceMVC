@@ -4,6 +4,9 @@ const { PORT, CLIENT_URL } = require('./constants')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 const cors = require('cors')
+// Importar las rutas de categoría
+const categoriaRoutes = require('./routes/categoria');
+const productRoutes = require('./routes/productRoutes');
 
 //import passport middleware
 require('./middlewares/passport-middleware')
@@ -19,6 +22,11 @@ const authRoutes = require('./routes/auth')
 
 //initialize routes
 app.use('/api', authRoutes)
+// Registrar la ruta de categoría
+app.use('/api/categorias', categoriaRoutes);
+app.use('/api', productRoutes);
+app.use('/uploads', express.static('uploads'));
+
 
 //app start
 const appStart = () => {
